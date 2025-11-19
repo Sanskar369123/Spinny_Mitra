@@ -1,726 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Spinny – Used Car Demo with Spinny Mitra</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
+  <meta charset="UTF-8">
+  <title>Spinny Mitra Voice Mode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      background: #f5f5f7;
-      color: #111827;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ---------- Top Nav (Spinny-like) ---------- */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: #ffffffcc;
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.75rem 1rem;
+      margin: 0;
+      background: #0d0d0e;
+      font-family: system-ui, sans-serif;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #f97373, #b91c1c);
-      display: flex;
-      align-items: center;
       justify-content: center;
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .nav-title {
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .nav-sub {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-
-    .nav-right {
-      display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 0.85rem;
-    }
-
-    .nav-pill {
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      background: #f3f4f6;
-    }
-
-    .nav-cta {
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      background: #ef4444;
-      color: #fff;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* ---------- Hero ---------- */
-    .hero {
-      max-width: 1100px;
-      margin: 2rem auto 3rem;
-      padding: 0 1rem;
-      display: grid;
-      gap: 2.5rem;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.9fr);
-      align-items: center;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: #fee2e2;
-      color: #b91c1c;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.1rem, 3.2vw, 2.8rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-title span {
-      color: #dc2626;
-    }
-
-    .hero-subtitle {
-      font-size: 0.95rem;
-      color: #4b5563;
-      max-width: 30rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.8rem;
-      color: #374151;
-    }
-
-    .hero-badge {
-      padding: 0.3rem 0.6rem;
-      border-radius: 999px;
-      background: #f3f4f6;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .hero-search {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-input {
-      flex: 1;
-      min-width: 220px;
-      padding: 0.65rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .hero-input:focus {
-      border-color: #ef4444;
-    }
-
-    .hero-btn {
-      padding: 0.65rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, #ef4444, #b91c1c);
-      color: #fff;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      white-space: nowrap;
-    }
-
-    .hero-meta {
-      font-size: 0.78rem;
-      color: #6b7280;
-    }
-
-    .hero-right {
-      position: relative;
-      height: 320px;
-      border-radius: 1.5rem;
+      height: 100vh;
       overflow: hidden;
-      background: radial-gradient(circle at 20% 0%, #fef2f2, #fee2e2 40%, #fefce8);
-      border: 1px solid #fee2e2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .hero-car {
-      width: 80%;
-      max-width: 420px;
-      border-radius: 1.2rem;
-      background: #111827;
-      color: #f9fafb;
-      padding: 1.2rem;
-      position: relative;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
-    }
-
-    .hero-car-title {
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-      font-size: 0.95rem;
-    }
-
-    .hero-car-sub {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-bottom: 1rem;
-    }
-
-    .hero-car-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-bottom: 1rem;
-      font-size: 0.7rem;
-      color: #d1d5db;
-    }
-
-    .hero-car-tag {
-      padding: 0.22rem 0.5rem;
-      border-radius: 999px;
-      background: #111827;
-      border: 1px solid #4b5563;
-    }
-
-    .hero-car-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-    }
-
-    .hero-car-price {
-      font-weight: 700;
-    }
-
-    .hero-car-pill {
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      background: #f97316;
-      color: #111827;
-      font-weight: 600;
-      font-size: 0.7rem;
-    }
-
-    /* ---------- Floating Spinny Mitra Button ---------- */
-    .spinny-mitra-btn {
-      position: fixed;
-      right: 1.6rem;
-      bottom: 1.6rem;
-      z-index: 40;
-      border: none;
-      border-radius: 999px;
-      padding: 0.65rem 1rem 0.65rem 0.65rem;
-      background: radial-gradient(circle at 0% 0%, #f97373, #b91c1c);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(248, 113, 113, 0.45);
-    }
-
-    .spinny-mitra-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #bfdbfe, #1d4ed8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .spinny-mitra-label {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .spinny-mitra-label span:first-child {
-      font-size: 0.7rem;
-      opacity: 0.8;
-    }
-
-    .spinny-mitra-label span:last-child {
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .spinny-mitra-mic-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    /* ---------- Modal ---------- */
-    .mitra-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.65);
-      display: none; /* toggled by JS */
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-      padding: 1rem;
-    }
-
-    .mitra-modal-content {
-      width: 100%;
-      max-width: 460px;
-      background: #050816;
-      border-radius: 1.6rem;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mitra-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.9rem 1rem;
-      background: linear-gradient(90deg, #020617, #111827);
-      color: #e5e7eb;
-      font-size: 0.85rem;
-    }
-
-    .mitra-header-left {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .mitra-header-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #60a5fa, #1d4ed8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-    }
-
-    .mitra-header-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-    }
-
-    .mitra-header-text strong {
-      font-size: 0.8rem;
-    }
-
-    .mitra-header-text span {
-      font-size: 0.7rem;
-      color: #9ca3af;
-    }
-
-    .mitra-close-btn {
-      background: transparent;
-      border: none;
-      color: #9ca3af;
-      cursor: pointer;
-      font-size: 1.1rem;
-    }
-
-    /* ---------- Voice screen ---------- */
-    .voice-container {
-      padding: 2.4rem 1.6rem 1.8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.8rem;
-      background: radial-gradient(circle at 20% 0%, #111827, #020617);
-      min-height: 360px;
-    }
-
-    .voice-avatar-wrapper {
-      position: relative;
-      width: 170px;
-      height: 170px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .voice-avatar-glow {
+    /* Hidden iframe */
+    #callkaro-frame {
+      opacity: 0;
+      width: 1px;
+      height: 1px;
       position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: conic-gradient(
-        from 200deg,
-        #93c5fd,
-        #60a5fa,
-        #22c55e,
-        #f97316,
-        #f97373,
-        #93c5fd
-      );
-      filter: blur(14px);
-      opacity: 0.7;
+      pointer-events: none;
     }
 
-    .voice-avatar {
+    /* Main voice UI */
+    .mitra-container {
+      width: 350px;
+      height: 580px;
+      background: #111;
+      border-radius: 30px;
+      box-shadow: 0 0 45px rgba(0,0,0,0.5);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       position: relative;
-      width: 145px;
-      height: 145px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 35% 20%, #e0f2fe, #38bdf8 45%, #1d4ed8);
-      box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.9);
     }
 
-    .voice-title {
+    .mitra-orb {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 20%, #e0f2fe, #38bdf8, #1e3a8a);
+      box-shadow: 0 0 60px rgba(30, 58, 138, 0.8);
+      animation: float 5s ease-in-out infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
+
+    .mitra-status {
+      color: #d1d5db;
+      margin-top: 22px;
       text-align: center;
-      color: #f9fafb;
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1rem;
     }
 
-    .voice-subtitle {
-      text-align: center;
-      color: #9ca3af;
-      font-size: 0.8rem;
-      max-width: 16rem;
-      margin: 0 auto;
+    .action-row {
+      margin-top: auto;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
     }
 
-    .voice-actions {
+    .mic-btn,.close-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       display: flex;
       justify-content: center;
-      gap: 0.9rem;
-      margin-top: 0.4rem;
-    }
-
-    .voice-btn-primary,
-    .voice-btn-secondary {
-      border-radius: 999px;
-      padding: 0.7rem 1.4rem;
-      border: none;
+      align-items: center;
+      font-size: 22px;
       cursor: pointer;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
     }
 
-    .voice-btn-primary {
+    .mic-btn {
       background: #22c55e;
-      color: #022c22;
-      font-weight: 600;
+      color: #042f18;
+      box-shadow: 0 0 20px rgba(34,197,94,0.5);
     }
 
-    .voice-btn-secondary {
-      background: transparent;
-      color: #9ca3af;
-      border: 1px solid #374151;
+    .close-btn {
+      background: #b91c1c;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(185,28,28,0.5);
     }
 
-    .voice-mic-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: #16a34a;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #f0fdf4;
-      font-size: 0.85rem;
-    }
-
-    /* ---------- Iframe ---------- */
-    .mitra-iframe {
-      width: 100%;
-      height: 420px;
-      border: none;
-      display: none; /* initially hidden */
-      background: #020617;
-    }
-
-    @media (max-width: 480px) {
-      .mitra-modal-content {
-        height: 90vh;
-      }
-      .mitra-iframe {
-        height: 100%;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- NAV -->
-  <header class="nav">
-    <div class="nav-inner">
-      <div class="nav-left">
-        <div class="nav-logo">S</div>
-        <div>
-          <div class="nav-title">Spinny</div>
-          <div class="nav-sub">Used Car Demo</div>
-        </div>
-      </div>
-      <div class="nav-right">
-        <div class="nav-pill">200-point inspection</div>
-        <div class="nav-pill">1-year warranty</div>
-        <button class="nav-cta">Book a Test Drive</button>
-      </div>
+
+  <!-- Hidden CallKaro iframe -->
+  <iframe 
+    id="callkaro-frame"
+    src="YOUR_CALLKARO_IFRAME_URL"
+    allow="microphone; autoplay"
+  ></iframe>
+
+  <!-- Custom UI Overlay -->
+  <div class="mitra-container">
+    <div class="mitra-orb"></div>
+
+    <div class="mitra-status" id="status">
+      Ready to help you find your perfect car.
     </div>
-  </header>
 
-  <!-- HERO -->
-  <main>
-    <section class="hero">
-      <div>
-        <div class="hero-kicker">
-          <span class="dot"></span>
-          10,000+ Spinny Assured cars
-        </div>
-        <h1 class="hero-title">
-          Buy your <span>perfect used car</span> with complete peace of mind.
-        </h1>
-        <p class="hero-subtitle">
-          Spinny Mitra, your AI car consultant, can help you choose the right car for
-          your budget, city and daily usage — just talk to it from this page.
-        </p>
-
-        <div class="hero-badges">
-          <div class="hero-badge">5-Day Money Back</div>
-          <div class="hero-badge">Fixed Price • No Hidden Charges</div>
-          <div class="hero-badge">Free RC Transfer</div>
-        </div>
-
-        <div class="hero-search">
-          <input
-            class="hero-input"
-            placeholder="Search by car model, e.g. Baleno, i20, Nexon..."
-          />
-          <button class="hero-btn">
-            🔍 Find Cars
-          </button>
-        </div>
-        <p class="hero-meta">
-          Showing a demo experience • Data & pricing for illustration only.
-        </p>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-car">
-          <div class="hero-car-title">Hyundai i20 Sportz 1.2</div>
-          <div class="hero-car-sub">2020 • 18,200 km • Petrol • Manual</div>
-          <div class="hero-car-tags">
-            <div class="hero-car-tag">Delhi • Spinny Park</div>
-            <div class="hero-car-tag">Non-accidental</div>
-            <div class="hero-car-tag">Zero-dep insurance</div>
-          </div>
-          <div class="hero-car-footer">
-            <div>
-              <div class="hero-car-price">₹7.2 Lakh</div>
-              <div style="font-size: 0.7rem; color: #9ca3af">
-                EMI from ₹13,500 / month
-              </div>
-            </div>
-            <div class="hero-car-pill">Spinny Assured</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FLOATING SPINNY MITRA BUTTON -->
-  <button id="spinny-mitra-btn" class="spinny-mitra-btn">
-    <div class="spinny-mitra-avatar">M</div>
-    <div class="spinny-mitra-label">
-      <span>Need help?</span>
-      <span>Talk to Spinny Mitra</span>
-    </div>
-    <div class="spinny-mitra-mic-dot"></div>
-  </button>
-
-  <!-- MODAL -->
-  <div id="mitra-modal" class="mitra-modal">
-    <div class="mitra-modal-content">
-      <div class="mitra-header">
-        <div class="mitra-header-left">
-          <div class="mitra-header-avatar">M</div>
-          <div class="mitra-header-text">
-            <strong>Spinny Mitra</strong>
-            <span>AI Car Consultant</span>
-          </div>
-        </div>
-        <button id="close-mitra" class="mitra-close-btn" aria-label="Close">
-          ✕
-        </button>
-      </div>
-
-      <!-- VOICE INTRO SCREEN -->
-      <div id="voice-container" class="voice-container">
-        <div class="voice-avatar-wrapper">
-          <div class="voice-avatar-glow"></div>
-          <div class="voice-avatar"></div>
-        </div>
-        <div>
-          <p class="voice-title">Ask anything about used cars.</p>
-          <p class="voice-subtitle">
-            I can help you pick the right car, shortlist options and answer questions about
-            Spinny — just start talking.
-          </p>
-        </div>
-        <div class="voice-actions">
-          <button id="start-chat" class="voice-btn-primary">
-            <span class="voice-mic-icon">🎙</span>
-            Start talking
-          </button>
-          <button id="close-mitra-secondary" class="voice-btn-secondary">
-            Close
-          </button>
-        </div>
-      </div>
-
-      <!-- IFRAME AGENT (HIDDEN UNTIL START) -->
-      <iframe
-        id="mitra-iframe"
-        class="mitra-iframe"
-        src="https://callkaro.ai/chatkaro/691d6205fceaffa5d86a526f"
-        allow="microphone; autoplay"
-      ></iframe>
+    <div class="action-row">
+      <div class="mic-btn" id="micBtn">🎤</div>
+      <div class="close-btn" id="closeBtn">✕</div>
     </div>
   </div>
 
-  <!-- SCRIPT: PLACE JUST BEFORE </body> -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const btn = document.getElementById("spinny-mitra-btn");
-      const modal = document.getElementById("mitra-modal");
-      const voice = document.getElementById("voice-container");
-      const iframe = document.getElementById("mitra-iframe");
-      const closeBtn = document.getElementById("close-mitra");
-      const closeSecondary = document.getElementById("close-mitra-secondary");
-      const startBtn = document.getElementById("start-chat");
+    const micBtn = document.getElementById("micBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const statusText = document.getElementById("status");
 
-      // Open modal
-      btn.onclick = () => {
-        modal.style.display = "flex";
-        // reset state every time you open
-        voice.style.display = "flex";
-        iframe.style.display = "none";
-      };
+    micBtn.onclick = () => {
+      statusText.textContent = "Listening…";
+      // 🔥 You can trigger iframe functions via postMessage if CallKaro supports it
+      // document.getElementById("callkaro-frame").contentWindow.postMessage(...)
+    };
 
-      // Close modal (both X and "Close" button)
-      const closeModal = () => {
-        modal.style.display = "none";
-        voice.style.display = "flex";
-        iframe.style.display = "none";
-      };
+    closeBtn.onclick = () => {
+      statusText.textContent = "Ending conversation…";
+      setTimeout(() => {
+        statusText.textContent = "Ready to help you again.";
+      }, 1000);
+    };
 
-      closeBtn.onclick = closeModal;
-      closeSecondary.onclick = closeModal;
-
-      // Start chat → hide voice UI → show iframe
-      startBtn.onclick = () => {
-        voice.style.display = "none";
-        iframe.style.display = "block";
-      };
-
-      // Click outside card closes widget
-      modal.onclick = (event) => {
-        if (event.target === modal) {
-          closeModal();
-        }
-      };
-    });
   </script>
+
 </body>
 </html>
