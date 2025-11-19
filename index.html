@@ -1,141 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Spinny Mitra Voice Mode</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      background: #0d0d0e;
-      font-family: system-ui, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+<meta charset="UTF-8" />
+<title>Spinny Mitra — Voice Mode</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    margin: 0;
+    background: #0d0d0e;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-    /* Hidden iframe */
-    #callkaro-frame {
-      opacity: 0;
-      width: 1px;
-      height: 1px;
-      position: absolute;
-      pointer-events: none;
-    }
+  /* FULLSCREEN CALLKARO IFRAME (INVISIBLE BUT ACTIVE) */
+  #callkaro-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 
-    /* Main voice UI */
-    .mitra-container {
-      width: 350px;
-      height: 580px;
-      background: #111;
-      border-radius: 30px;
-      box-shadow: 0 0 45px rgba(0,0,0,0.5);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
+    /* invisible but interactive */
+    opacity: 0.01;
 
-    .mitra-orb {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 20%, #e0f2fe, #38bdf8, #1e3a8a);
-      box-shadow: 0 0 60px rgba(30, 58, 138, 0.8);
-      animation: float 5s ease-in-out infinite;
-      margin-top: 20px;
-    }
+    pointer-events: auto;
+    z-index: 1;
+    border: none;
+  }
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
-      100% { transform: translateY(0); }
-    }
+  /* CUSTOM UI ABOVE THE IFRAME */
+  .mitra-container {
+    position: relative;
+    z-index: 9999;
+    width: 360px;
+    height: 600px;
+    background: #111;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .mitra-status {
-      color: #d1d5db;
-      margin-top: 22px;
-      text-align: center;
-      font-size: 1rem;
-    }
+  .mitra-orb {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 20%, #e0f2fe, #38bdf8, #1e3a8a);
+    animation: float 5s ease-in-out infinite;
+    box-shadow: 0 0 60px rgba(30,58,138,0.6);
+    margin-top: 20px;
+  }
 
-    .action-row {
-      margin-top: auto;
-      margin-bottom: 20px;
-      display: flex;
-      gap: 20px;
-    }
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+  }
 
-    .mic-btn,.close-btn {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
-      cursor: pointer;
-    }
+  .mitra-status {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #d1d5db;
+    text-align: center;
+  }
 
-    .mic-btn {
-      background: #22c55e;
-      color: #042f18;
-      box-shadow: 0 0 20px rgba(34,197,94,0.5);
-    }
+  .controls {
+    margin-top: auto;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+  }
 
-    .close-btn {
-      background: #b91c1c;
-      color: #fff;
-      box-shadow: 0 0 20px rgba(185,28,28,0.5);
-    }
+  .mic-btn, .close-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-  </style>
+  .mic-btn {
+    background: #22c55e;
+    color: #022c22;
+    box-shadow: 0 0 22px rgba(34,197,94,0.5);
+  }
+
+  .close-btn {
+    background: #b91c1c;
+    color: #fff;
+    box-shadow: 0 0 22px rgba(185,28,28,0.5);
+  }
+</style>
 </head>
+
 <body>
 
-  <!-- Hidden CallKaro iframe -->
-  <iframe 
-    id="callkaro-frame"
-    src="YOUR_CALLKARO_IFRAME_URL"
-    allow="microphone; autoplay"
-  ></iframe>
+<!-- 🔥 CALLKARO ENGINE (HIDDEN BEHIND UI BUT ACTIVE) -->
+<iframe
+  id="callkaro-frame"
+  src="https://callkaro.ai/chatkaro/691d6205fceaffa5d86a526f"
+  allow="microphone; autoplay"
+></iframe>
 
-  <!-- Custom UI Overlay -->
-  <div class="mitra-container">
-    <div class="mitra-orb"></div>
+<!-- 🔥 BEAUTIFUL SPINNY MITRA CUSTOM UI -->
+<div class="mitra-container">
 
-    <div class="mitra-status" id="status">
-      Ready to help you find your perfect car.
-    </div>
+  <div class="mitra-orb"></div>
 
-    <div class="action-row">
-      <div class="mic-btn" id="micBtn">🎤</div>
-      <div class="close-btn" id="closeBtn">✕</div>
-    </div>
+  <div id="status" class="mitra-status">
+    Ready to help you choose your perfect car.
   </div>
 
-  <script>
-    const micBtn = document.getElementById("micBtn");
-    const closeBtn = document.getElementById("closeBtn");
-    const statusText = document.getElementById("status");
+  <div class="controls">
+    <div id="micBtn" class="mic-btn">🎤</div>
+    <div id="closeBtn" class="close-btn">✕</div>
+  </div>
 
-    micBtn.onclick = () => {
-      statusText.textContent = "Listening…";
-      // 🔥 You can trigger iframe functions via postMessage if CallKaro supports it
-      // document.getElementById("callkaro-frame").contentWindow.postMessage(...)
-    };
+</div>
 
-    closeBtn.onclick = () => {
-      statusText.textContent = "Ending conversation…";
-      setTimeout(() => {
-        statusText.textContent = "Ready to help you again.";
-      }, 1000);
-    };
+<script>
+  const iframe = document.getElementById("callkaro-frame");
+  const micBtn = document.getElementById("micBtn");
+  const statusText = document.getElementById("status");
 
-  </script>
+  // 🔥 SECRET TRICK: Forward a CLICK into the iframe
+  function forwardClickToIframe() {
+    const rect = iframe.getBoundingClientRect();
+
+    // Create a click event at center of iframe
+    const evt = new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      clientX: rect.left + 50,
+      clientY: rect.top + 50,
+    });
+
+    iframe.dispatchEvent(evt);
+  }
+
+  // 🔥 MIC BUTTON: Activates CallKaro listening
+  micBtn.onclick = () => {
+    statusText.textContent = "Listening…";
+
+    // Simulate a click inside iframe UI → this triggers mic
+    forwardClickToIframe();
+
+    // OPTIONAL: Additional message
+    setTimeout(() => {
+      statusText.textContent = "Processing…";
+    }, 3000);
+  };
+
+  // Close doesn't stop the agent, just UI feedback
+  document.getElementById("closeBtn").onclick = () => {
+    statusText.textContent = "Ending conversation…";
+    setTimeout(() => {
+      statusText.textContent = "Ready to help you choose your perfect car.";
+    }, 1200);
+  };
+</script>
 
 </body>
 </html>
