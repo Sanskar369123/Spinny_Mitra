@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spinny AI Car Advisor</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f6f7fb;
+    }
+
+    .navbar {
+      background: white;
+      padding: 15px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #e9ecf2;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 800;
+      color: #e51640;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #222;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .ai-box {
+      margin: 40px auto;
+      width: 95%;
+      max-width: 1100px;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    iframe {
+      width: 100%;
+      height: 650px;
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      text-align: center;
+      background: white;
+      font-size: 14px;
+      color: #777;
+      border-top: 2px solid #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="brand">Spinny AI</div>
+  </div>
+
+  <div class="hero">
+    <h1>Your AI Car Buying Assistant</h1>
+    <p>Ask anything about buying a car — powered by your CallKaro voice agent.</p>
+  </div>
+
+  <div class="ai-box">
+    <iframe 
+      src="https://callkaro.ai/chatkaro/691d6205fceaffa5d86a526f" 
+      allow="microphone; autoplay"
+      title="Spinny AI Assistant">
+    </iframe>
+  </div>
+
+  <div class="footer">
+    © 2025 Spinny AI — Powered by CallKaro Voice Intelligence
+  </div>
+
+</body>
+</html>
